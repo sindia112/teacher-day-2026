@@ -300,7 +300,7 @@ async function loadPayments() {
                 paymentsRef,
                 orderBy(
                     "createdAt",
-                    "desc"
+                    "asc"
                 )
             );
 
