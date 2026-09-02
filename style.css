@@ -1,694 +1,1163 @@
-/* =========================================================
-   Teacher's Day Contribution Website
-   Clean Responsive Styles
-========================================================= */
+/* ================================
+   Teacher's Day Contribution
+   Main Styles
+================================ */
 
-/* ---------- Reset ---------- */
+
+/* ================================
+   Basic Reset
+================================ */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    width: 100%;
-    overflow-x: hidden;
-}
+
+/* ================================
+   Body
+================================ */
 
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: #f5f7fb;
     color: #222;
     min-height: 100vh;
-    overflow-x: hidden;
 }
 
-/* ---------- Header ---------- */
+
+/* ================================
+   Header
+================================ */
+
 header {
     background: #ffffff;
     padding: 20px 6%;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+
     border-bottom: 1px solid #e5e7eb;
 }
 
-.header-content {
-    min-width: 0;
-}
 
 .header-content h1 {
     font-size: 26px;
     margin-bottom: 5px;
 }
 
+
 .header-content p {
     color: #666;
     font-size: 14px;
-    line-height: 1.4;
 }
 
+
+/* ================================
+   Admin Login Button
+================================ */
+
 #adminLoginBtn {
-    flex-shrink: 0;
     border: none;
+
     background: #222;
-    color: #fff;
+    color: white;
+
     padding: 11px 18px;
+
     border-radius: 8px;
+
     font-size: 14px;
+
     cursor: pointer;
+
     transition: 0.2s;
 }
+
 
 #adminLoginBtn:hover {
     opacity: 0.85;
 }
+
 
 #adminLoginBtn:disabled {
     cursor: default;
     opacity: 1;
 }
 
-/* ---------- Main ---------- */
+
+/* ================================
+   Main
+================================ */
+
 main {
     width: 88%;
     max-width: 1100px;
+
     margin: 35px auto;
 }
 
-/* ---------- Welcome ---------- */
+
+/* ================================
+   Welcome Section
+================================ */
+
 .welcome {
     text-align: center;
-    background: #fff;
+
+    background: white;
+
     padding: 35px 20px;
+
     border-radius: 14px;
+
     margin-bottom: 25px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.05);
 }
+
 
 .welcome h2 {
     font-size: 25px;
     margin-bottom: 10px;
 }
 
+
 .welcome p {
     color: #666;
     font-size: 15px;
-    line-height: 1.5;
 }
 
-/* ---------- Summary ---------- */
+
+/* ================================
+   Summary Cards
+================================ */
+
 .summary {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
     gap: 18px;
+
     margin-bottom: 30px;
 }
 
+
 .card {
-    background: #fff;
+    background: white;
+
     padding: 25px;
+
     border-radius: 14px;
+
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
+
 .card-icon {
-    display: block;
     font-size: 28px;
+
+    display: block;
+
     margin-bottom: 10px;
 }
 
+
 .card h3 {
     font-size: 15px;
+
     color: #666;
+
     margin-bottom: 8px;
 }
 
+
 .card p {
     font-size: 25px;
+
     font-weight: bold;
 }
 
-/* ---------- Admin Dashboard ---------- */
+
+/* ========================================
+   ADMIN DASHBOARD
+======================================== */
+
 #adminDashboard {
     display: none;
-    background: #fff;
-    border: 1px solid #e8ebf0;
+
+    background: #ffffff;
+
+    padding: 0;
+
     border-radius: 16px;
+
     margin-bottom: 30px;
+
     overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+
+    border: 1px solid #e8ebf0;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.06);
 }
+
+
+/* ========================================
+   Dashboard Header
+======================================== */
 
 .dashboard-header {
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
-    gap: 20px;
+
     padding: 22px 25px;
-    background: linear-gradient(135deg, #f8fafc, #fff);
+
+    background: linear-gradient(
+        135deg,
+        #f8fafc,
+        #ffffff
+    );
+
     border-bottom: 1px solid #e9edf2;
 }
 
+
 .dashboard-header h2 {
     font-size: 21px;
+
     color: #111827;
+
     margin-bottom: 5px;
 }
 
+
 .dashboard-header p {
     color: #6b7280;
+
     font-size: 13px;
+
+    margin: 0;
 }
 
-#logoutBtn {
-    flex-shrink: 0;
-    border: 1px solid #e5e7eb;
-    background: #fff;
-    color: #374151;
-    padding: 9px 16px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
+
+/* ========================================
+   Admin Status
+======================================== */
+
+.dashboard-header::after {
+    content: "● ADMIN";
+
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
 }
+
+
+/* ========================================
+   Logout Button
+======================================== */
+
+#logoutBtn {
+    border: 1px solid #e5e7eb;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    padding: 9px 16px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
 
 #logoutBtn:hover {
     background: #fef2f2;
+
     border-color: #fecaca;
+
     color: #dc2626;
 }
+
+
+/* ========================================
+   Add Payment Area
+======================================== */
 
 .add-payment {
     padding: 25px;
 }
 
+
 .add-payment h3 {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
     font-size: 17px;
+
     color: #111827;
+
     margin-bottom: 18px;
 }
 
+
+/* ========================================
+   Payment Form
+======================================== */
+
 .payment-form {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 180px auto;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        180px
+        auto;
+
     gap: 14px;
+
     align-items: end;
 }
 
+
+/* ========================================
+   Form Group
+======================================== */
+
 .form-group {
     display: flex;
+
     flex-direction: column;
-    min-width: 0;
 }
+
 
 .form-group label {
     font-size: 12px;
+
     font-weight: 600;
+
     color: #4b5563;
+
     margin-bottom: 7px;
 }
 
+
 .form-group input {
     width: 100%;
+
     height: 42px;
+
     padding: 0 12px;
+
     border: 1px solid #d9dee7;
+
     border-radius: 8px;
-    background: #fff;
+
+    background: #ffffff;
+
     color: #111827;
+
     outline: none;
+
     font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
 
 .form-group input::placeholder {
     color: #9ca3af;
 }
 
+
 .form-group input:focus {
     border-color: #6b7280;
-    box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.10);
+
+    box-shadow:
+        0 0 0 3px rgba(107, 114, 128, 0.10);
 }
+
+
+/* ========================================
+   Save Payment Button
+======================================== */
 
 #savePaymentBtn {
     height: 42px;
+
     border: none;
+
     padding: 0 20px;
+
     border-radius: 8px;
+
     background: #1f2937;
-    color: #fff;
+
+    color: #ffffff;
+
     font-size: 13px;
+
     font-weight: 600;
+
     cursor: pointer;
+
     white-space: nowrap;
-    transition: 0.2s;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
 }
+
 
 #savePaymentBtn:hover {
     background: #111827;
-    box-shadow: 0 5px 12px rgba(17, 24, 39, 0.18);
+
+    box-shadow:
+        0 5px 12px rgba(17, 24, 39, 0.18);
 }
+
+
+#savePaymentBtn:active {
+    transform: translateY(1px);
+}
+
 
 #savePaymentBtn:disabled {
     opacity: 0.6;
+
     cursor: not-allowed;
+
     box-shadow: none;
 }
 
+
+/* ========================================
+   Save Message
+======================================== */
+
 #saveMessage {
     min-height: 20px;
+
     margin-top: 14px;
+
+    padding: 0;
+
     font-size: 13px;
+
+    color: #15803d;
 }
 
-/* ---------- Payment Section ---------- */
-.payment-section {
-    background: #fff;
-    padding: 25px;
-    border-radius: 14px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+/* ========================================
+   Mobile Dashboard
+======================================== */
+
+@media (max-width: 700px) {
+
+    #adminDashboard {
+        border-radius: 13px;
+    }
+
+
+    .dashboard-header {
+        padding: 20px;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 15px;
+    }
+
+
+    .dashboard-header h2 {
+        font-size: 19px;
+    }
+
+
+    #logoutBtn {
+        width: 100%;
+    }
+
+
+    .add-payment {
+        padding: 20px;
+    }
+
+
+    .payment-form {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+
+    #savePaymentBtn {
+        width: 100%;
+    }
+
 }
 
-.section-title {
+
+/* ================================
+   Dashboard Header
+================================ */
+
+.dashboard-header {
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
+
+    margin-bottom: 25px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #eeeeee;
 }
 
-.section-heading {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
+
+.dashboard-header h2 {
+    font-size: 22px;
+
+    margin-bottom: 5px;
 }
 
-.section-title h2 {
-    font-size: 20px;
-    white-space: nowrap;
+
+.dashboard-header p {
+    color: #666;
+
+    font-size: 14px;
 }
 
-#downloadPdfBtn {
-    flex-shrink: 0;
-    border: 1px solid #d1d5db;
-    background: #fff;
-    color: #374151;
-    padding: 8px 13px;
-    border-radius: 7px;
-    font-size: 12px;
-    font-weight: 600;
+
+/* ================================
+   Logout Button
+================================ */
+
+#logoutBtn {
+    border: none;
+
+    background: #dc2626;
+
+    color: white;
+
+    padding: 10px 17px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
     cursor: pointer;
+
     transition: 0.2s;
 }
 
+
+#logoutBtn:hover {
+    background: #b91c1c;
+}
+
+
+/* ================================
+   Add Payment Box
+================================ */
+
+.add-payment {
+    background: #f8fafc;
+
+    padding: 22px;
+
+    border-radius: 10px;
+
+    border: 1px solid #e5e7eb;
+}
+
+
+.add-payment h3 {
+    font-size: 18px;
+
+    margin-bottom: 18px;
+}
+
+/* ========================================
+   Payment Section Heading
+======================================== */
+
+.section-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+/* ========================================
+   Download PDF Button
+======================================== */
+
+#downloadPdfBtn {
+    border: 1px solid #d1d5db;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    padding: 8px 13px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
 #downloadPdfBtn:hover {
     background: #f3f4f6;
+
     border-color: #9ca3af;
+
     color: #111827;
 }
+
 
 #downloadPdfBtn:active {
     transform: translateY(1px);
 }
 
+/* ================================
+   Payment Form
+================================ */
+
+.payment-form {
+    display: grid;
+
+    grid-template-columns:
+        1fr 180px auto;
+
+    gap: 15px;
+
+    align-items: end;
+}
+
+
+/* ================================
+   Form Group
+================================ */
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.form-group label {
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 7px;
+}
+
+
+.form-group input {
+    width: 100%;
+
+    padding: 11px 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    background: white;
+}
+
+
+.form-group input:focus {
+    border-color: #555;
+}
+
+
+/* ================================
+   Save Payment Button
+================================ */
+
+#savePaymentBtn {
+    border: none;
+
+    background: #1f2937;
+
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    white-space: nowrap;
+}
+
+
+#savePaymentBtn:hover {
+    background: #111827;
+}
+
+
+#savePaymentBtn:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* ================================
+   Save Message
+================================ */
+
+#saveMessage {
+    margin-top: 14px;
+
+    font-size: 14px;
+
+    min-height: 20px;
+}
+
+
+/* ================================
+   Payment Section
+================================ */
+
+.payment-section {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+
+.section-title {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+
+.section-title h2 {
+    font-size: 20px;
+}
+
+
+/* ================================
+   Search
+================================ */
+
 #searchBox {
     width: 220px;
-    height: 38px;
-    padding: 0 12px;
+
+    padding: 10px 12px;
+
     border: 1px solid #ddd;
+
     border-radius: 7px;
+
     outline: none;
+
     font-size: 14px;
-    flex-shrink: 0;
 }
+
 
 #searchBox:focus {
     border-color: #555;
 }
 
-/* ---------- Table ---------- */
+
+/* ================================
+   Table
+================================ */
+
 .table-container {
     width: 100%;
+
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border-radius: 8px;
 }
+
 
 table {
     width: 100%;
-    min-width: 650px;
+
     border-collapse: collapse;
 }
+
 
 thead {
     background: #f5f6f8;
 }
 
+
 th,
 td {
     padding: 14px 12px;
+
     text-align: left;
+
     border-bottom: 1px solid #eee;
+
     font-size: 14px;
 }
+
 
 th {
     font-weight: 600;
 }
 
+
 td {
     color: #555;
 }
+
 
 tbody tr:hover {
     background: #fafafa;
 }
 
-/* ---------- Footer ---------- */
+
+/* ================================
+   Footer
+================================ */
+
 footer {
     text-align: center;
+
     padding: 25px;
+
     color: #777;
+
     font-size: 13px;
-    line-height: 1.5;
 }
 
-/* ---------- Login Modal ---------- */
+
+/* ================================
+   Admin Login Modal
+================================ */
+
 .login-box {
     display: none;
+
     position: fixed;
+
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
+
+    background:
+        rgba(0, 0, 0, 0.55);
+
     z-index: 1000;
+
     justify-content: center;
+
     align-items: center;
+
     padding: 20px;
 }
 
+
+/* ================================
+   Login Content
+================================ */
+
 .login-content {
     width: 100%;
+
     max-width: 380px;
-    background: #fff;
+
+    background: white;
+
     padding: 28px;
+
     border-radius: 14px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.25);
 }
+
 
 .login-content h2 {
     text-align: center;
+
     margin-bottom: 20px;
 }
 
+
+/* ================================
+   Login Inputs
+================================ */
+
 .login-content input {
     width: 100%;
+
     padding: 12px 14px;
+
     margin-bottom: 12px;
+
     border: 1px solid #ddd;
+
     border-radius: 8px;
+
     outline: none;
+
     font-size: 14px;
 }
+
 
 .login-content input:focus {
     border-color: #1f2937;
 }
 
+
+/* ================================
+   Login Buttons
+================================ */
+
 .login-buttons {
     display: flex;
+
     gap: 10px;
+
     margin-top: 5px;
 }
 
+
 .login-buttons button {
     flex: 1;
+
     padding: 11px;
+
     border: none;
+
     border-radius: 8px;
+
     font-weight: bold;
+
     cursor: pointer;
 }
 
+
+/* Login */
+
 #loginBtn {
     background: #1f2937;
-    color: #fff;
+
+    color: white;
 }
+
+
+/* Cancel */
 
 #closeLoginBtn {
     background: #e5e7eb;
+
     color: #222;
 }
 
+
+/* ================================
+   Login Message
+================================ */
+
 #loginMessage {
     text-align: center;
+
     margin-top: 14px;
+
     font-size: 14px;
+
     min-height: 20px;
 }
 
-/* =========================================================
-   Mobile
-========================================================= */
+
+/* ================================
+   Mobile Responsive
+================================ */
+
 @media (max-width: 700px) {
 
-    body {
-        background: #f5f7fb;
-    }
-
     /* Header */
+
     header {
         padding: 16px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 14px;
+
+        gap: 15px;
     }
 
-    .header-content {
-        text-align: center;
-    }
 
     .header-content h1 {
-        font-size: 21px;
-        line-height: 1.3;
+        font-size: 19px;
     }
+
 
     .header-content p {
         font-size: 12px;
     }
 
+
     #adminLoginBtn {
-        width: 100%;
-        padding: 11px 14px;
-        font-size: 13px;
-    }
+        padding: 9px 12px;
 
-    /* Main */
-    main {
-        width: calc(100% - 24px);
-        max-width: none;
-        margin: 16px auto 24px;
-    }
-
-    /* Welcome */
-    .welcome {
-        padding: 24px 16px;
-        margin-bottom: 16px;
-        border-radius: 12px;
-    }
-
-    .welcome h2 {
-        font-size: 20px;
-        line-height: 1.35;
-    }
-
-    .welcome p {
-        font-size: 13px;
-    }
-
-    /* Summary */
-    .summary {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        margin-bottom: 16px;
-    }
-
-    .card {
-        padding: 18px;
-        border-radius: 12px;
-        display: grid;
-        grid-template-columns: 42px 1fr;
-        grid-template-rows: auto auto;
-        column-gap: 12px;
-        align-items: center;
-        text-align: left;
-    }
-
-    .card-icon {
-        grid-row: 1 / 3;
-        margin: 0;
-        font-size: 25px;
-        text-align: center;
-    }
-
-    .card h3 {
-        margin: 0 0 3px;
-        font-size: 13px;
-    }
-
-    .card p {
-        font-size: 21px;
-    }
-
-    /* Dashboard */
-    #adminDashboard {
-        border-radius: 12px;
-        margin-bottom: 16px;
-    }
-
-    .dashboard-header {
-        padding: 18px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 13px;
-    }
-
-    .dashboard-header h2 {
-        font-size: 18px;
-    }
-
-    .dashboard-header p {
         font-size: 12px;
     }
+
+
+    /* Main */
+
+    main {
+        width: 94%;
+
+        margin: 20px auto;
+    }
+
+
+    /* Summary */
+
+    .summary {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* First two cards in one row on mobile */
+    .summary .card:nth-child(3) {
+        grid-column: 1 / -1;
+    }
+
+
+    /* Dashboard */
+
+    #adminDashboard {
+        padding: 18px;
+    }
+
+
+    .dashboard-header {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 15px;
+    }
+
 
     #logoutBtn {
         width: 100%;
-        padding: 10px;
     }
 
-    .add-payment {
-        padding: 18px;
-    }
 
-    .add-payment h3 {
-        font-size: 16px;
-        margin-bottom: 15px;
-    }
+    /* Payment Form */
 
     .payment-form {
         grid-template-columns: 1fr;
-        gap: 11px;
+
+        gap: 12px;
     }
 
-    .form-group label {
-        font-size: 12px;
-    }
-
-    .form-group input {
-        height: 44px;
-        font-size: 14px;
-    }
 
     #savePaymentBtn {
         width: 100%;
-        height: 44px;
     }
 
+
     /* Payment Section */
-    .payment-section {
-        padding: 16px;
-        border-radius: 12px;
-    }
 
     .section-title {
         flex-direction: column;
+
         align-items: stretch;
+
         gap: 12px;
-        margin-bottom: 16px;
     }
 
-    .section-heading {
-        width: 100%;
-        justify-content: space-between;
-        gap: 8px;
-    }
-
-    .section-title h2 {
-        font-size: 18px;
-    }
-
-    #downloadPdfBtn {
-        padding: 8px 10px;
-        font-size: 11px;
-    }
 
     #searchBox {
         width: 100%;
-        height: 40px;
     }
 
-    /* Table */
-    .table-container {
-        border: 1px solid #eee;
+
+    .payment-section {
+        padding: 18px;
     }
+
 
     th,
     td {
-        padding: 11px 10px;
-        font-size: 12px;
         white-space: nowrap;
     }
 
-    /* Footer */
-    footer {
-        padding: 20px 12px;
-        font-size: 11px;
+
+    /* Welcome */
+
+    .welcome {
+        padding: 28px 15px;
     }
 
-    /* Login */
-    .login-box {
-        padding: 16px;
+
+    .welcome h2 {
+        font-size: 21px;
     }
 
-    .login-content {
-        padding: 22px 18px;
-        border-radius: 12px;
-    }
 
-    .login-content h2 {
-        font-size: 19px;
-        margin-bottom: 17px;
-    }
-
-    .login-content input {
-        padding: 12px;
+    .welcome p {
         font-size: 14px;
     }
-}
 
-/* Very small phones */
-@media (max-width: 380px) {
-
-    .header-content h1 {
-        font-size: 19px;
-    }
-
-    .section-heading {
-        align-items: flex-start;
-    }
-
-    .section-title h2 {
-        font-size: 17px;
-    }
-
-    #downloadPdfBtn {
-        font-size: 10px;
-        padding: 7px 8px;
-    }
-
-    .payment-section {
-        padding: 13px;
-    }
 }
