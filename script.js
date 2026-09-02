@@ -386,6 +386,17 @@ async function loadPayments() {
 
 
 // ========================================
+// Load Payments for Everyone
+// ========================================
+//
+// IMPORTANT:
+// Payment list login ke bina bhi load hogi.
+//
+
+loadPayments();
+
+
+// ========================================
 // Search Payments
 // ========================================
 
@@ -581,7 +592,7 @@ loginBtn.addEventListener(
 
 onAuthStateChanged(
     auth,
-    async function (user) {
+    function (user) {
 
         if (user) {
 
@@ -605,9 +616,6 @@ onAuthStateChanged(
 
             adminLoginBtn.disabled =
                 true;
-
-
-            await loadPayments();
 
         }
 
