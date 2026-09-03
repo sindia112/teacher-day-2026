@@ -882,105 +882,35 @@ setInterval(
 // ========================================
 
 async function loadVisitorCount() {
-
-    if (!visitorCount) {
-        return;
-    }
-
+    if (!visitorCount) return;
 
     try {
+        const visitorRef = doc(db, "siteStats", "visitors");
 
-        const visitorRef =
-            doc(
-                db,
-                "siteStats",
-                "visitors"
-            );
-
-
-        const alreadyCounted =
-            localStorage.getItem(
-                "teacherDayVisitorCounted"
-            );
-
-
-        // --------------------------------
-        // First Visit
-        // --------------------------------
-
-        if (!alreadyCounted) {
-
-            await setDoc(
-                visitorRef,
-                {
-                    count:
-                        increment(1)
-                },
-                {
-                    merge: true
-                }
-            );
-
-
-            localStorage.setItem(
-                "teacherDayVisitorCounted",
-                "true"
-            );
-
-        }
-
-
-        // --------------------------------
-        // Get Current Count
-        // --------------------------------
-
-        const snapshot =
-            await getDoc(
-                visitorRef
-            );
-
-
-        if (snapshot.exists()) {
-
-            const data =
-                snapshot.data();
-
-
-            const count =
-                Number(
-                    data.count || 0
-                );
-
-
-            visitorCount.textContent =
-                count.toLocaleString("en-IN");
-
-        }
-
-        else {
-
-            visitorCount.textContent =
-                "0";
-
-        }
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Visitor Counter Error:",
-            error
+        // हर बार page खुलने या refresh होने पर count +1
+        await setDoc(
+            visitorRef,
+            { count: increment(1) },
+            { merge: true }
         );
 
+        // Updated count पढ़ना
+        const snapshot = await getDoc(visitorRef);
 
-        visitorCount.textContent =
-            "—";
+        if (snapshot.exists()) {
+            const data = snapshot.data();
 
+            visitorCount.textContent =
+                Number(data.count || 0).toLocaleString("en-IN");
+        } else {
+            visitorCount.textContent = "0";
+        }
+
+    } catch (error) {
+        console.error("Visitor Counter Error:", error);
+        visitorCount.textContent = "—";
     }
-
 }
-
 
 loadVisitorCount();
 
