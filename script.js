@@ -30,7 +30,11 @@ import {
     getDocs,
     serverTimestamp,
     query,
-    orderBy
+    orderBy,
+    doc,
+    getDoc,
+    setDoc,
+    increment
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
@@ -155,6 +159,17 @@ const downloadPdfBtn =
 
 
 // ========================================
+// Countdown & Visitor Elements
+// ========================================
+
+const countdown =
+    document.getElementById("countdown");
+
+const visitorCount =
+    document.getElementById("visitorCount");
+
+
+// ========================================
 // Display Payments
 // ========================================
 
@@ -226,7 +241,7 @@ function updateSummary() {
 
 
     totalAmount.textContent =
-        total;
+        total.toLocaleString("en-IN");
 
 }
 
@@ -315,10 +330,10 @@ async function loadPayments() {
 
 
         snapshot.forEach(
-            function (doc) {
+            function (docSnapshot) {
 
                 const data =
-                    doc.data();
+                    docSnapshot.data();
 
 
                 const dateTime =
@@ -330,7 +345,7 @@ async function loadPayments() {
                 payments.push({
 
                     id:
-                        doc.id,
+                        docSnapshot.id,
 
                     name:
                         data.name,
@@ -388,10 +403,6 @@ async function loadPayments() {
 // ========================================
 // Load Payments for Everyone
 // ========================================
-//
-// IMPORTANT:
-// Payment list login ke bina bhi load hogi.
-//
 
 loadPayments();
 
@@ -787,6 +798,194 @@ savePaymentBtn.addEventListener(
 
 
 // ========================================
+// Teacher's Day Countdown
+// ========================================
+
+function updateCountdown() {
+
+    if (!countdown) {
+        return;
+    }
+
+
+    const eventDate =
+        new Date(
+            "September 5, 2026 00:00:00"
+        ).getTime();
+
+
+    const now =
+        new Date().getTime();
+
+
+    const difference =
+        eventDate - now;
+
+
+    if (difference <= 0) {
+
+        countdown.textContent =
+            "🎉 Happy Teacher's Day!";
+
+        return;
+    }
+
+
+    const days =
+        Math.floor(
+            difference /
+            (1000 * 60 * 60 * 24)
+        );
+
+
+    const hours =
+        Math.floor(
+            (difference %
+                (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
+
+
+    const minutes =
+        Math.floor(
+            (difference %
+                (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
+
+
+    const seconds =
+        Math.floor(
+            (difference %
+                (1000 * 60)) /
+            1000
+        );
+
+
+    countdown.textContent =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+}
+
+
+updateCountdown();
+
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+
+// ========================================
+// Visitor Counter
+// ========================================
+
+async function loadVisitorCount() {
+
+    if (!visitorCount) {
+        return;
+    }
+
+
+    try {
+
+        const visitorRef =
+            doc(
+                db,
+                "siteStats",
+                "visitors"
+            );
+
+
+        const alreadyCounted =
+            localStorage.getItem(
+                "teacherDayVisitorCounted"
+            );
+
+
+        // --------------------------------
+        // First Visit
+        // --------------------------------
+
+        if (!alreadyCounted) {
+
+            await setDoc(
+                visitorRef,
+                {
+                    count:
+                        increment(1)
+                },
+                {
+                    merge: true
+                }
+            );
+
+
+            localStorage.setItem(
+                "teacherDayVisitorCounted",
+                "true"
+            );
+
+        }
+
+
+        // --------------------------------
+        // Get Current Count
+        // --------------------------------
+
+        const snapshot =
+            await getDoc(
+                visitorRef
+            );
+
+
+        if (snapshot.exists()) {
+
+            const data =
+                snapshot.data();
+
+
+            const count =
+                Number(
+                    data.count || 0
+                );
+
+
+            visitorCount.textContent =
+                count.toLocaleString("en-IN");
+
+        }
+
+        else {
+
+            visitorCount.textContent =
+                "0";
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Visitor Counter Error:",
+            error
+        );
+
+
+        visitorCount.textContent =
+            "—";
+
+    }
+
+}
+
+
+loadVisitorCount();
+
+
+// ========================================
 // Download Payment List as PDF
 // ========================================
 
@@ -804,60 +1003,48 @@ downloadPdfBtn.addEventListener(
         }
 
 
-        const doc =
+        const pdf =
             new jsPDF();
 
 
-        // --------------------------------
-        // Title
-        // --------------------------------
+        pdf.setFontSize(18);
 
-        doc.setFontSize(18);
-
-        doc.setFont(
+        pdf.setFont(
             "helvetica",
             "bold"
         );
 
-        doc.text(
+        pdf.text(
             "Teacher's Day 2026",
             14,
             20
         );
 
 
-        // --------------------------------
-        // Subtitle
-        // --------------------------------
+        pdf.setFontSize(11);
 
-        doc.setFontSize(11);
-
-        doc.setFont(
+        pdf.setFont(
             "helvetica",
             "normal"
         );
 
-        doc.text(
+        pdf.text(
             "Class Contribution Payment List",
             14,
             28
         );
 
 
-        doc.text(
+        pdf.text(
             "SUK | Science Faculty",
             14,
             35
         );
 
 
-        // --------------------------------
-        // Summary
-        // --------------------------------
+        pdf.setFontSize(10);
 
-        doc.setFontSize(10);
-
-        doc.text(
+        pdf.text(
             "Students Paid: " +
             payments.length,
             14,
@@ -877,7 +1064,7 @@ downloadPdfBtn.addEventListener(
             );
 
 
-        doc.text(
+        pdf.text(
             "Total Collected: Rs. " +
             total,
             80,
@@ -885,34 +1072,30 @@ downloadPdfBtn.addEventListener(
         );
 
 
-        doc.text(
+        pdf.text(
             "Event Date: 5 September 2026",
             145,
             45
         );
 
 
-        // --------------------------------
-        // Table Header
-        // --------------------------------
-
         let y = 58;
 
 
-        doc.setFont(
+        pdf.setFont(
             "helvetica",
             "bold"
         );
 
 
-        doc.setFillColor(
+        pdf.setFillColor(
             245,
             246,
             248
         );
 
 
-        doc.rect(
+        pdf.rect(
             14,
             y - 6,
             182,
@@ -921,39 +1104,35 @@ downloadPdfBtn.addEventListener(
         );
 
 
-        doc.text(
+        pdf.text(
             "#",
             17,
             y
         );
 
 
-        doc.text(
+        pdf.text(
             "Student Name",
             30,
             y
         );
 
 
-        doc.text(
+        pdf.text(
             "Amount",
             125,
             y
         );
 
 
-        doc.text(
+        pdf.text(
             "Date & Time",
             150,
             y
         );
 
 
-        // --------------------------------
-        // Table Rows
-        // --------------------------------
-
-        doc.setFont(
+        pdf.setFont(
             "helvetica",
             "normal"
         );
@@ -965,21 +1144,20 @@ downloadPdfBtn.addEventListener(
         payments.forEach(
             function (payment, index) {
 
-                // New page
                 if (y > 280) {
 
-                    doc.addPage();
+                    pdf.addPage();
 
                     y = 20;
 
 
-                    doc.setFont(
+                    pdf.setFont(
                         "helvetica",
                         "bold"
                     );
 
 
-                    doc.text(
+                    pdf.text(
                         "Teacher's Day 2026 - Payment List",
                         14,
                         y
@@ -989,7 +1167,7 @@ downloadPdfBtn.addEventListener(
                     y += 10;
 
 
-                    doc.setFont(
+                    pdf.setFont(
                         "helvetica",
                         "normal"
                     );
@@ -997,24 +1175,21 @@ downloadPdfBtn.addEventListener(
                 }
 
 
-                // Number
-                doc.text(
+                pdf.text(
                     String(index + 1),
                     17,
                     y
                 );
 
 
-                // Student Name
-                doc.text(
+                pdf.text(
                     String(payment.name),
                     30,
                     y
                 );
 
 
-                // Amount
-                doc.text(
+                pdf.text(
                     "Rs. " +
                     String(payment.amount),
                     125,
@@ -1022,8 +1197,7 @@ downloadPdfBtn.addEventListener(
                 );
 
 
-                // Date & Time
-                doc.text(
+                pdf.text(
                     String(payment.date) +
                     " " +
                     String(payment.time),
@@ -1032,15 +1206,14 @@ downloadPdfBtn.addEventListener(
                 );
 
 
-                // Row line
-                doc.setDrawColor(
+                pdf.setDrawColor(
                     230,
                     230,
                     230
                 );
 
 
-                doc.line(
+                pdf.line(
                     14,
                     y + 3,
                     196,
@@ -1054,31 +1227,23 @@ downloadPdfBtn.addEventListener(
         );
 
 
-        // --------------------------------
-        // Footer
-        // --------------------------------
+        pdf.setFontSize(9);
 
-        doc.setFontSize(9);
-
-        doc.setTextColor(
+        pdf.setTextColor(
             100,
             100,
             100
         );
 
 
-        doc.text(
-            "Science Facuilty | Teacher's Day Contribution Management 2026 | SURAJ KUMAR",
+        pdf.text(
+            "Science Faculty | Teacher's Day Contribution Management 2026 | SURAJ KUMAR",
             14,
             290
         );
 
 
-        // --------------------------------
-        // Download PDF
-        // --------------------------------
-
-        doc.save(
+        pdf.save(
             "Teacher_Day_2026_Payment_List.pdf"
         );
 
